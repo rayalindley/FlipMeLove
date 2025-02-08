@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bg-window {
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background: url('assets/images/IMG_4897.JPG') no-repeat center center/cover;
+}

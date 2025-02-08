@@ -6,6 +6,8 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 400,
         height: 500,
+        title: "Flip Me Love",
+        frame: false,
         resizable: false,
         webPreferences: {
             nodeIntegration: true,
