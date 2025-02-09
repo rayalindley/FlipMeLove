@@ -79,5 +79,7 @@ body {
 
 .back-bg-window div {
     border: 1px solid black;
-    width: 10px;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
 }
