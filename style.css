@@ -75,8 +75,7 @@ body {
 
 #game {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    border: 1px solid black;
+    grid-template-columns: repeat(4, 80px);
     gap: 10px;
 }
 
@@ -87,14 +86,18 @@ body {
 
 .card {
     display: flex;
+    padding: 5px;
     width: 80px;
     height: 100px;
-    background-color: #007bff;
-    color: white;
+    text-align: center;
+    align-items: center;
+    background-color: #990011;
+    color: black;
     cursor: pointer;
-    font-size: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
 }
 
 .flipped {
-    background-color: #28a745;
+    background-color: pink;
 }
