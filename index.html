@@ -9,6 +9,7 @@
 
 <body>
     <div class="flipmelove-container" id="flipmelove-container">
+        <audio id="bg-music" src="assets/audio/bg-music.mp3"></audio>
         <div class="landing-menu" id="landing-menu">
             <div class="landing-window">
                 <div class="cta-text"> Click anywhere to start </div>
@@ -23,6 +24,7 @@
                     <div></div>
                     <div></div>
                 </div> -->
+                
                 <div id="game"></div>
                 <div id="win-message"> You like me too? </div>
             </div>
@@ -30,6 +32,12 @@
     </div>
 
     <script>
+        // playing of the bg music
+        window.onload = () => {
+            document.getElementById('bg-music').play();
+        };
+
+
         // flipping of landing window
         document.body.addEventListener('click', () => {
             document.getElementById('flipmelove-container').classList.add('flip');
@@ -71,6 +79,10 @@
         }
 
         function flipCard() {
+            const flipEffect = new Audio('assets/audio/flip-effect.wav');
+            flipEffect.play();
+            flipEffect.volume = 0.3;
+
             if(match) return;
 
             if(this === firstCard) return;
@@ -102,6 +114,9 @@
         }
 
         function unflip() {
+            const unflipEffect = new Audio('assets/audio/unflip-effect.wav');
+            unflipEffect.play();
+
             setTimeout(() => {
                 firstCard.classList.remove('flipped');
                 firstCard.textContent = "";
@@ -119,6 +134,9 @@
             game.style.display = "none";
 
             if(isWin) {
+                const winEffect = new Audio('assets/audio/win-effect.wav');
+                winEffect.play();
+
                 winMessage.style.display = "block";
             }
         }
