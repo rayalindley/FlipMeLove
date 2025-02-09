@@ -13,6 +13,7 @@
         <div class="landing-menu" id="landing-menu">
             <div class="landing-window">
                 <div class="cta-text"> Click anywhere to start </div>
+                <!-- <button id="play-again" onclick="reload()"> Play Again </button> -->
             </div>
 
             <div class="menu-window">
@@ -36,12 +37,18 @@
         window.onload = () => {
             document.getElementById('bg-music').play();
         };
-
+        
 
         // flipping of landing window
         document.body.addEventListener('click', () => {
             document.getElementById('flipmelove-container').classList.add('flip');
         })
+
+        // play again
+        // function reload() {
+        //     const replayButton = document.getElementById('play-again');
+        //     replayButton.style.display = "block";
+        // }
 
         // card game
         const game = document.getElementById('game');
