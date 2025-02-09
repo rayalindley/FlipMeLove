@@ -15,14 +15,16 @@
             </div>
 
             <div class="menu-window">
-                <div class="back-bg-window">
+                <!-- <div class="back-bg-window">
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
                     <div></div>
-                </div>
+                </div> -->
+                <div id="game"></div>
+                <div id="win-message"> You like me too? </div>
             </div>
         </div>
     </div>
@@ -34,6 +36,12 @@
         })
 
         // card game
+        const game = document.getElementById('game');
+        const winMessage = document.getElementById('win-message');
+
+        let firstCard = null;
+        let secondCard = null;
+        let match = false;
 
         const cardTexts = [
             "I love the way your mind works",
@@ -44,10 +52,78 @@
             "You make simple moments special",
             "Your presence just feels right",
             "Every moment we share stays with me",
-            "I remember the little things u say",
-            "I wish I could freeze time when I'm with you",
-            "I wish you could see yourself the way I see you"
+            // "I remember the little things u say",
+            // "I wish I could freeze time when I'm with you",
+            // "I wish you could see yourself the way I see you"
         ]
+
+        const cardValues = [...cardTexts,...cardTexts];
+        cardValues.sort(() => 0.5-Math.random());
+
+        function createCards() {
+            cardValues.forEach(text => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.setAttribute('data-text', text);
+                card.addEventListener('click', flipCard);
+                game.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if(match) return;
+
+            if(this === firstCard) return;
+
+            this.classList.add('flipped');
+            this.textContent = this.getAttribute('data-text');
+
+            if(!firstCard) {
+                firstCard = this;
+            } else {
+                secondCard = this;
+                checkIfMatch();
+            }
+        }
+
+        function checkIfMatch() {
+            match = true;
+
+            const isMatch = firstCard.getAttribute('data-text') === secondCard.getAttribute('data-text');
+            isMatch ? disableFlip() : unflip();
+        }
+
+        function disableFlip() {
+            resetGame();
+
+            if(document.querySelectorAll('.card.flipped').length === cardValues.length) {
+                endGame(true);
+            }
+        }
+
+        function unflip() {
+            setTimeout(() => {
+                firstCard.classList.remove('flipped');
+                firstCard.textContent = "";
+                secondCard.classList.remove('flipped');
+                secondCard.textContent = "";
+                resetGame();
+            }, 1000);
+        }
+
+        function resetGame() {
+            [firstCard, secondCard, match] = [null, null, false];
+        }
+
+        function endGame(isWin) {
+            game.style.display = "none";
+
+            if(isWin) {
+                winMessage.style.display = "block";
+            }
+        }
+
+        createCards();
     </script>
 </body>
 </html>
