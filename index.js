@@ -1,25 +1,54 @@
-const{app, BrowserWindow} = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 let mainWindow;
+let secondWindow;
 
-function createWindow() {
-    mainWindow = new BrowserWindow({
+function createNewWindow(file) {
+    let win = new BrowserWindow({
         width: 400,
         height: 500,
         title: "Flip Me Love",
         frame: false,
         resizable: false,
+        transparent: true,
         webPreferences: {
             nodeIntegration: true,
+            contextIsolation: false, // Ensure ipcRenderer works
         },
     });
 
-    mainWindow.setMenuBarVisibility(false);
-    mainWindow.loadFile('index.html');
+    win.setMenuBarVisibility(false);
+    win.loadFile(file);
 
-    mainWindow.on('closed', () => {
-        mainWindow = null;
+    win.on('closed', () => {
+        win = null;
     });
+
+    return win;
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    mainWindow = createNewWindow('index.html');
+});
+
+ipcMain.on('open-second-window', () => {
+    if (mainWindow) {
+        setTimeout(() => {
+            mainWindow.close(); // Wait for flip animation
+            secondWindow = createNewWindow('menu.html');
+        }, 600);
+    } else {
+        secondWindow = createNewWindow('menu.html');
+    }
+});
+
+ipcMain.on('open-first-window', () => {
+    if (mainWindow) {
+        setTimeout(() => {
+            secondWindow.close(); // Wait for flip animation
+            secondWindow = createNewWindow('index.html');
+        }, 600);
+    } else {
+        secondWindow = createNewWindow('index.html');
+    }
+});
