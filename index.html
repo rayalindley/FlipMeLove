@@ -28,7 +28,9 @@
         
         // playing of the bg music
         window.onload = () => {
-            document.getElementById('bg-music').play();
+            let bgMusic = document.getElementById('bg-music')
+            bgMusic.play();
+            bgMusic.volume = 0.4;
         };
         
 
@@ -109,7 +111,7 @@
             resetGame();
 
             if(document.querySelectorAll('.card.flipped').length === cardValues.length) {
-                endGame(true);
+                endGame();
             }
         }
 
@@ -130,17 +132,16 @@
             [firstCard, secondCard, match] = [null, null, false];
         }
 
-        function endGame(isWin) {
+        function endGame() {
             game.style.display = "none";
 
-            if(isWin) {
-                confetti();
+            confetti();
 
-                const winEffect = new Audio('assets/audio/win-effect.wav');
-                winEffect.play();
+            const winEffect = new Audio('assets/audio/win-effect.wav');
+            winEffect.play();
 
-                winMessage.style.display = "block";
-            }
+            winMessage.style.display = "block";
+    
         }
 
         createCards();
