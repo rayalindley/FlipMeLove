@@ -23,7 +23,9 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+        
         // playing of the bg music
         window.onload = () => {
             document.getElementById('bg-music').play();
@@ -132,6 +134,8 @@
             game.style.display = "none";
 
             if(isWin) {
+                confetti();
+
                 const winEffect = new Audio('assets/audio/win-effect.wav');
                 winEffect.play();
 
