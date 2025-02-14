@@ -30,6 +30,7 @@
         // playing of the bg music
         window.onload = () => {
             let bgMusic = document.getElementById('bg-music')
+            bgMusic.loop = true;
             bgMusic.play();
             bgMusic.volume = 0.4;
         };
@@ -61,11 +62,11 @@
             "Hugging you is one of my favorite things",
             "You make my heart beat faster",
             "You make simple moments special",
-            "Your presence just feels right",
-            "Every moment we share stays with me",
+            // "Your presence just feels right",
+            // "Every moment we share stays with me",
             // "I remember the little things u say",
-            // "I wish I could freeze time when I'm with you",
-            // "I wish you could see yourself the way I see you"
+            "I wish I could freeze time when I'm with you",
+            "I wish you could see yourself the way I see you"
         ]
 
         const cardValues = [...cardTexts,...cardTexts];
