@@ -120,8 +120,6 @@
         }
 
         function unflip() {
-            const unflipEffect = new Audio('assets/audio/unflip-effect.wav');
-            unflipEffect.play();
 
             setTimeout(() => {
                 firstCard.classList.remove('flipped');
@@ -129,7 +127,12 @@
                 secondCard.classList.remove('flipped');
                 secondCard.textContent = "";
                 resetGame();
+                
+                const unflipEffect = new Audio('assets/audio/unflip-effect.wav');
+                unflipEffect.play();
             }, 1000);
+
+            
         }
 
         function resetGame() {
