@@ -16,15 +16,16 @@
                 <!-- <button id="play-again" onclick="reload()"> Play Again </button> -->
             </div>
 
-            <div class="menu-window">
+            <div class="menu-window" id="menu-window">
                 <div id="game"></div>
-                <div id="win-message"> You like me too? </div>
+                <!-- <div id="win-message"> You like me too? </div> -->
             </div>
         </div>
     </div>
 
     <script type="module">
         import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+        let container = document.getElementById('flipmelove-container');
         
         // playing of the bg music
         window.onload = () => {
@@ -36,7 +37,7 @@
 
         // flipping of landing window
         document.body.addEventListener('click', () => {
-            document.getElementById('flipmelove-container').classList.add('flip');
+            container.classList.add('flip');
         })
 
         // play again
@@ -47,7 +48,7 @@
 
         // card game
         const game = document.getElementById('game');
-        const winMessage = document.getElementById('win-message');
+        // const winMessage = document.getElementById('win-message');
 
         let firstCard = null;
         let secondCard = null;
@@ -108,6 +109,9 @@
         }
 
         function disableFlip() {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+
             resetGame();
 
             if(document.querySelectorAll('.card.flipped').length === cardValues.length) {
@@ -134,14 +138,14 @@
 
         function endGame() {
             game.style.display = "none";
+            document.getElementById('menu-window').style.backgroundImage = "url('assets/images/winCard.png')";
 
             confetti();
 
             const winEffect = new Audio('assets/audio/win-effect.wav');
             winEffect.play();
 
-            winMessage.style.display = "block";
-    
+            // winMessage.style.display = "block";
         }
 
         createCards();
